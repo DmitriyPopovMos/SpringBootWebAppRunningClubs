@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+                                                            <!-- xmlns:th="http://www.thymeleaf.org" - это объявление пространства имён для атрибутов th* в шаблоне Thymeleaf -->
+                                                            <!-- xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" - это указание пространства имён для диалекта Thymeleaf Layout, который позволяет создавать макеты и повторно используемые шаблоны -->
+<head>
+    <meta charset="UTF-8">
+    <title>Event list</title>
+</head>
+
+<body class="d-flex flex-column h-100" style="background-image: url('/image/image.png'); background-position: center; background-repeat: no-repeat; background-size: cover">
+<main class="flex-shrink-0">
+
+    <section layout:fragment="body" class="py-5">
+        <div class="container px-5 my-5">
+            <div class="text-center mb-5">
+                <h1 class="fw-bolder" style="color: #fff900">Find Running Events</h1>
+                <p style="color: black" ><b>Find running events near you</b></p>
+            </div>
+            <div class="row gx-5">
+                <div th:each="event : ${events}" class="col-lg-6 mb-0">
+                    <span>
+                    <a class="btn btn-warning" th:href="@{/events/{id}(id=${event.id})}">View</a>
+                    </span>
+
+                    <span th:if="${user.id} == ${event.club.createdBy.id}">        <!-- Проверка совпадают ли user.id и club.createdBy.id -->
+                        <a class="btn btn-dark" th:href="@{/events/update/{id}(id=${event.id})}">Edit</a>
+                    </span>
+
+                    <div class="position-relative mb-3">
+                        <a th:text="${event.name}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!"></a>
+                        <br>
+                        <img class="img-fluid rounded-3 mb-3" th:src="${event.photoUrl}" alt="..." width="400"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+</body>
+</html>

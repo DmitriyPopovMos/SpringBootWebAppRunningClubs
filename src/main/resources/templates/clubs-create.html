@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}" xmlns:resize="http://www.w3.org/1999/xhtml">
+                                                                <!-- xmlns:th="http://www.thymeleaf.org" - это объявление пространства имён для атрибутов th* в шаблоне Thymeleaf -->
+                                                                <!-- xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" - это указание пространства имён для диалекта Thymeleaf Layout, который позволяет создавать макеты и повторно используемые шаблоны -->
+<head>
+    <meta charset="UTF-8">
+    <title>Clubs Create</title>
+</head>
+
+<body class="d-flex flex-column h-100" style="background-image: url('/image/image.png'); background-position: center; background-repeat: no-repeat; background-size: cover">
+<main class="flex-shrink-0">
+
+    <section layout:fragment="body" class="py-5">
+        <div class="container">
+        <form role="form" th:action="@{/clubs/save}" th:object="${club}" method="post">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputTitle"><b>Title</b></label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="inputTitle"
+                            name="title"
+                            th:field="*{title}"
+                            placeholder="Title">
+                    <p th:if="${#fields.hasErrors('title')}" class="text-danger" th:errors="*{title}"></p>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPhotoUrl"><b>PhotoUrl</b></label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="inputPhotoUrl"
+                            name="photoUrl"
+                            th:field="*{photoUrl}"
+                            placeholder="PhotoUrl">
+                    <p th:if="${#fields.hasErrors('photoUrl')}" class="text-danger" th:errors="*{photoUrl}"></p>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="inputContent"><b>Content</b></label>
+                <textarea class="form-control-1"
+                          id="inputContent"
+                          rows="10"
+                          cols="85"
+                          type="text"
+                          th:field="*{content}"
+                          placeholder="Content">
+                </textarea>
+                <p th:if="${#fields.hasErrors('content')}" class="text-danger" th:errors="*{content}"></p>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-warning">Create</button>
+        </form>
+        </div>
+    </section>
+
+</main>
+
+</body>
+</html>
